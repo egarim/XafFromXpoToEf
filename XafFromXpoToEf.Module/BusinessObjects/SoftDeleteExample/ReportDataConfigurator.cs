@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace XafFromXpoToEf.Module.BusinessObjects.SoftDeleteExample
 {
+    /// <summary>
+    /// This configurator is used to add a soft delete filter to the ReportDataV2 entity
+    /// </summary>
     public class ReportDataConfigurator : IEntityTypeConfiguration<ReportDataV2>
     {
         public void Configure(EntityTypeBuilder<ReportDataV2> builder)
