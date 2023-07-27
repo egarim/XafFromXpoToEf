@@ -12,6 +12,7 @@ using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
 using XafFromXpoToEf.Module.BusinessObjects.ConcurrencyCheck;
 using System.Data;
 using DevExpress.ExpressApp;
+using XafFromXpoToEf.Module.BusinessObjects.ChangeNotification;
 
 namespace XafFromXpoToEf.Module.BusinessObjects;
 
@@ -60,7 +61,7 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
 
     public DbSet<ConcurrencyObject> ConcurrencyObject { get; set; }
 
-
+    public DbSet<SimplePersonWithCustomNotificationTrigger> SimplePersonWithCustomNotificationTrigger { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
