@@ -9,6 +9,7 @@ using XafFromXpoToEf.Module.BusinessObjects.SoftDeleteExample;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
+using XafFromXpoToEf.Module.BusinessObjects.ConcurrencyCheck;
 
 namespace XafFromXpoToEf.Module.BusinessObjects;
 
@@ -54,6 +55,9 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
     public DbSet<ReportDataV2> ReportDataV2 { get; set; }
 
     public DbSet<SoftDelete> SoftDelete { get; set; }
+
+    public DbSet<ConcurrencyObject> ConcurrencyObject { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
