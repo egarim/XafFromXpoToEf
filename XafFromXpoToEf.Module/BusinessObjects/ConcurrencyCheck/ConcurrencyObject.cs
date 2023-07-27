@@ -56,7 +56,7 @@ namespace XafFromXpoToEf.Module.BusinessObjects.ConcurrencyCheck
         [Timestamp]
         public virtual byte[] Timestamp { get; set; } // Or a Timestamp which will be automatically changed every time a row is updated.
 
-
+        public virtual string Test { get; set; }
     }
 
 

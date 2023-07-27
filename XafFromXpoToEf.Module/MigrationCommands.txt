@@ -1,0 +1,23 @@
+1) add package
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+2) in the class XafFromXpoToEfDesignTimeDbContextFactory go to the CreateDbContext comment the exception and uncomment the code below
+    public XafFromXpoToEfEFCoreDbContext CreateDbContext(string[] args)
+    {
+        //throw new InvalidOperationException("Make sure that the database connection string and connection provider are correct. After that, uncomment the code below and remove this exception.");
+        var optionsBuilder = new DbContextOptionsBuilder<XafFromXpoToEfEFCoreDbContext>();
+        optionsBuilder.UseSqlServer("Integrated Security=SSPI;Data Source=(localdb)\\mssqllocaldb;Initial Catalog=XafFromXpoToEf");
+        optionsBuilder.UseChangeTrackingProxies();
+        optionsBuilder.UseObjectSpaceLinkProxies();
+        return new XafFromXpoToEfEFCoreDbContext(optionsBuilder.Options);
+    }
+
+3) in the Package Manager Console select XafFromXpoToEf.EFCore project and run the command
+
+dotnet ef migrations add InitialSetup --context XafFromXpoToEfEFCoreDbContext
+
+4) rinse and repeat just change the name of the migration
+
+dotnet ef migrations add NewMigrationName --context XafFromXpoToEfEFCoreDbContext

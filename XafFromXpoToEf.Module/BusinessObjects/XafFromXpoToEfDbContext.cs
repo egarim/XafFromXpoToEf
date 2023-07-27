@@ -31,12 +31,12 @@ public class XafFromXpoToEfDesignTimeDbContextFactory : IDesignTimeDbContextFact
 {
     public XafFromXpoToEfEFCoreDbContext CreateDbContext(string[] args)
     {
-        throw new InvalidOperationException("Make sure that the database connection string and connection provider are correct. After that, uncomment the code below and remove this exception.");
-        //var optionsBuilder = new DbContextOptionsBuilder<XafFromXpoToEfEFCoreDbContext>();
-        //optionsBuilder.UseSqlServer("Integrated Security=SSPI;Data Source=(localdb)\\mssqllocaldb;Initial Catalog=XafFromXpoToEf");
-        //optionsBuilder.UseChangeTrackingProxies();
-        //optionsBuilder.UseObjectSpaceLinkProxies();
-        //return new XafFromXpoToEfEFCoreDbContext(optionsBuilder.Options);
+        //throw new InvalidOperationException("Make sure that the database connection string and connection provider are correct. After that, uncomment the code below and remove this exception.");
+        var optionsBuilder = new DbContextOptionsBuilder<XafFromXpoToEfEFCoreDbContext>();
+        optionsBuilder.UseSqlServer("Integrated Security=SSPI;Data Source=(localdb)\\mssqllocaldb;Initial Catalog=XafFromXpoToEf");
+        optionsBuilder.UseChangeTrackingProxies();
+        optionsBuilder.UseObjectSpaceLinkProxies();
+        return new XafFromXpoToEfEFCoreDbContext(optionsBuilder.Options);
     }
 }
 [TypesInfoInitializer(typeof(XafFromXpoToEfContextInitializer))]
