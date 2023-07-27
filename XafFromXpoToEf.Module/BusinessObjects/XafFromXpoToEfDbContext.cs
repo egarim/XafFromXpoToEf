@@ -10,6 +10,8 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using static DevExpress.CodeParser.CodeStyle.Formatting.Rules;
 using XafFromXpoToEf.Module.BusinessObjects.ConcurrencyCheck;
+using System.Data;
+using DevExpress.ExpressApp;
 
 namespace XafFromXpoToEf.Module.BusinessObjects;
 
@@ -85,12 +87,12 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
     {
 
         //HACK log to any action that accepts a string message as parameter
-        optionsBuilder
-        .LogTo((message) =>
-         {
-             ///HACK log to Debug.WriteLine but you can write it to a file if needed
-             Debug.WriteLine(message);
-         });
+        //optionsBuilder
+        //.LogTo((message) =>
+        // {
+        //     ///HACK log to Debug.WriteLine but you can write it to a file if needed
+        //     Debug.WriteLine(message);
+        // });
 
         //HACK there are several type of loggers, this is just one of them, check the nugets that start with the name Microsoft.Extensions.Logging
         //For example, Microsoft.Extensions.Logging.Console and Microsoft.Extensions.Logging.Debug
@@ -123,8 +125,16 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
     //HACK override to update soft delete status
     public override int SaveChanges()
     {
-        UpdateSoftDeleteStatuses();
-        return base.SaveChanges();
+        try 
+        { 
+            UpdateSoftDeleteStatuses();
+            return base.SaveChanges();
+        }
+        catch (Exception ex)        
+        {
+            throw new UserFriendlyException(ex.Message);
+        }
+       
     }
     protected virtual void UpdateSoftDeleteStatuses()
     {

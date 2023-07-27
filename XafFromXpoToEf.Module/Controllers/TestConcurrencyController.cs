@@ -52,35 +52,11 @@ namespace XafFromXpoToEf.Module.Controllers
             var User2Os = this.Application.CreateObjectSpace(typeof(ConcurrencyObject));
             var user2Entity = User2Os.FindObject<ConcurrencyObject>(null);
 
-            user2Entity.Name = "Test2"; // User 1 makes a change
+            user2Entity.Name = "Test2"; // User 2 makes a change
 
             User1Os.CommitChanges();
             
-            User2Os.CommitChanges();
-
-            //// User 2 also gets an instance of the entity
-            //using (var user2Context = new MyContext(options))
-            //    {
-            //        var user2Entity = await user2Context.YourEntities.SingleAsync(e => e.Id == 1);
-
-            //        user2Entity.MyProperty = 1; // User 2 makes a change
-            //        await user2Context.SaveChangesAsync(); // and saves it
-
-            //        user1Entity.MyProperty = 2; // User 1 makes a different change
-
-            //        // When user 1 tries to save, a DbUpdateConcurrencyException should be thrown
-            //        var exceptionThrown = false;
-            //        try
-            //        {
-            //            await user1Context.SaveChangesAsync();
-            //        }
-            //        catch (DbUpdateConcurrencyException)
-            //        {
-            //            exceptionThrown = true;
-            //        }
-
-
-            //    }
+            User2Os.CommitChanges();          
 
         }
         protected override void OnActivated()
