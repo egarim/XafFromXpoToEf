@@ -13,6 +13,8 @@ using XafFromXpoToEf.Module.BusinessObjects.ConcurrencyCheck;
 using System.Data;
 using DevExpress.ExpressApp;
 using XafFromXpoToEf.Module.BusinessObjects.ChangeNotification;
+using System.Reflection;
+using XafFromXpoToEf.Module.BusinessObjects.BaseObjectFunctionality;
 
 namespace XafFromXpoToEf.Module.BusinessObjects;
 
@@ -59,6 +61,9 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
 
     public DbSet<SoftDelete> SoftDelete { get; set; }
 
+    public DbSet<MyBaseEfObject1> MyBaseEfObject1 { get; set; }
+    public DbSet<MyBaseEfObject2> MyBaseEfObject2 { get; set; }
+    public DbSet<MyBaseEfObject3> MyBaseEfObject3 { get; set; }
     public DbSet<ConcurrencyObject> ConcurrencyObject { get; set; }
 
     public DbSet<SimplePersonWithCustomNotificationTrigger> SimplePersonWithCustomNotificationTrigger { get; set; }
@@ -81,8 +86,10 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
         //HACK using configuration class to add soft delete for an entity in a XAF built in module
         modelBuilder.ApplyConfiguration(new ReportDataConfigurator());
 
+        modelBuilder.AddSoftDeleteForChildsOf(typeof(MyBaseEfObject)).AddTimeStampConcurrencyForChildsOf(typeof(MyBaseEfObject));
     }
 
+  
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
