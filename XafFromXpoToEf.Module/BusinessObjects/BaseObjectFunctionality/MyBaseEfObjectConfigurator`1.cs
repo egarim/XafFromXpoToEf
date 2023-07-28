@@ -29,9 +29,10 @@ namespace XafFromXpoToEf.Module.BusinessObjects.BaseObjectFunctionality
         public void Configure(EntityTypeBuilder<T> builder)
         {
 
-            builder.Property<byte[]>("Timestamp").IsConcurrencyToken()
-               .ValueGeneratedOnAddOrUpdate();
-
+            //builder.Property<byte[]>("Timestamp").IsConcurrencyToken()
+            //   .ValueGeneratedOnAddOrUpdate();
+            builder.Property<byte[]>("Timestamp")
+               .IsRowVersion(); // This makes the property a concurrency token
         }
     }
 }

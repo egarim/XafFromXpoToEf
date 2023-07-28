@@ -86,7 +86,7 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
         //HACK using configuration class to add soft delete for an entity in a XAF built in module
         modelBuilder.ApplyConfiguration(new ReportDataConfigurator());
 
-        modelBuilder.AddSoftDeleteForChildsOf(typeof(MyBaseEfObject)).AddTimeStampConcurrencyForChildsOf(typeof(MyBaseEfObject));
+        modelBuilder.AddSoftDeleteForChildsOf(typeof(MyBaseEfObject)).AddSoftDeleteForChildsOf(typeof(MyBaseEfObject));
     }
 
   
