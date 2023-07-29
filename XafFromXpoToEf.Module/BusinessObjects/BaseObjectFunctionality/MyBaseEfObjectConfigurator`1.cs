@@ -29,10 +29,31 @@ namespace XafFromXpoToEf.Module.BusinessObjects.BaseObjectFunctionality
         public void Configure(EntityTypeBuilder<T> builder)
         {
 
-            //builder.Property<byte[]>("Timestamp").IsConcurrencyToken()
-            //   .ValueGeneratedOnAddOrUpdate();
-            builder.Property<byte[]>("Timestamp")
-               .IsRowVersion(); // This makes the property a concurrency token
+            builder.Property<byte[]>("Timestamp").IsConcurrencyToken()
+               .ValueGeneratedOnAddOrUpdate();
+
+         
         }
     }
+
+    public class DefaultStringConfiguration<T> : IEntityTypeConfiguration<T> where T : class
+    {
+        int DefaultLength;
+        public DefaultStringConfiguration(int DefaultLength)
+        {
+            this.DefaultLength= DefaultLength;
+        }
+        public virtual void Configure(EntityTypeBuilder<T> builder)
+        {
+            var stringProperties = typeof(T).GetProperties()
+                                            .Where(p => p.PropertyType == typeof(string));
+
+            foreach (var prop in stringProperties)
+            {
+                builder.Property(prop.Name).HasMaxLength(DefaultLength); // set length to 200 for example
+            }
+        }
+    }
+
+
 }
