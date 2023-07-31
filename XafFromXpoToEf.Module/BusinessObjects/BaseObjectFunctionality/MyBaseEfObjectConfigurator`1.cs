@@ -45,8 +45,13 @@ namespace XafFromXpoToEf.Module.BusinessObjects.BaseObjectFunctionality
         }
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            var stringProperties = typeof(T).GetProperties()
-                                            .Where(p => p.PropertyType == typeof(string));
+
+            var stringProperties = builder.Metadata.GetProperties()
+                                             .Where(p => p.ClrType == typeof(string));
+
+
+            //var stringProperties = typeof(T).GetProperties()
+            //                                .Where(p => p.PropertyType == typeof(string));
 
             foreach (var prop in stringProperties)
             {

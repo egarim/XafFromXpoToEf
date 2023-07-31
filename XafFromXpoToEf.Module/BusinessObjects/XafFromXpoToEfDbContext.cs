@@ -89,7 +89,7 @@ public class XafFromXpoToEfEFCoreDbContext : DbContext
         modelBuilder
             .AddSoftDeleteForChildsOf(typeof(MyBaseEfObject))
             .AddTimeStampConcurrencyForChildsOf(typeof(MyBaseEfObject))
-             .WithDefaultStringLenghtForChildsOf(typeof(MyBaseEfObject),150);
+            .WithDefaultStringLenghtForChildsOf(typeof(MyBaseEfObject),150);
 
     }
 
